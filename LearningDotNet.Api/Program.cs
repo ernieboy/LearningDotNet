@@ -1,6 +1,16 @@
+using FluentValidation;
+using LearningDotNet.Api.Behaviours;
+using LearningDotNet.Api.Extensions;
+using LearningDotNet.Application.Features.Students;
+using LearningDotNet.Infrastructure.DependencyInjection;
+using MediatR;
+
 namespace LearningDotNet.Api;
 public class Program
 {
+    protected Program()
+    {
+    }
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +20,11 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+        builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateStudentRequestHandler>());
+
+        builder.Services.RegisterServices(builder);
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -20,32 +35,9 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-
-        var summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        app.MapGet("/weatherforecast", () =>
-            {
-                var forecast = Enumerable.Range(1, 5).Select(index =>
-                        new WeatherForecast
-                        (
-                            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                            Random.Shared.Next(-20, 55),
-                            summaries[Random.Shared.Next(summaries.Length)]
-                        ))
-                    .ToArray();
-                return forecast;
-            })
-            .WithName("GetWeatherForecast")
-            .WithOpenApi();
+        app.RegisterWeatherApi();
+        app.RegisterStudentApi();
 
         app.Run();
-    }
-
-    internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-    {
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }
 }
