@@ -2,6 +2,7 @@ using FluentValidation;
 using LearningDotNet.Api.Behaviours;
 using LearningDotNet.Api.Extensions;
 using LearningDotNet.Application.Features.Students;
+using LearningDotNet.Common.Middleware;
 using LearningDotNet.Infrastructure.DependencyInjection;
 using MediatR;
 
@@ -27,6 +28,7 @@ public class Program
         builder.Services.RegisterServices(builder);
         var app = builder.Build();
 
+        app.UseMiddleware<ValidationExceptionHandlingMiddleware>();
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {

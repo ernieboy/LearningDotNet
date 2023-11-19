@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LearningDotNet.Common\LearningDotNet.Common.csproj" />
     <ProjectReference Include="..\LearningDotNet.Infrastructure\LearningDotNet.Infrastructure.csproj" />
   </ItemGroup>
 </Project>
