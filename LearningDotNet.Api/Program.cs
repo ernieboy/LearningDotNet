@@ -24,7 +24,6 @@ public class Program
         builder.Services.AddValidatorsFromAssembly(typeof(CreateStudentRequestValidator).Assembly);
         builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         
-
         builder.Services.RegisterServices(builder);
         var app = builder.Build();
 
@@ -37,7 +36,7 @@ public class Program
 
         app.UseHttpsRedirection();
         app.RegisterWeatherApi();
-        app.RegisterStudentApi();
+        app.ConfigureStudentCreateApiEndpoint();
 
         app.Run();
     }

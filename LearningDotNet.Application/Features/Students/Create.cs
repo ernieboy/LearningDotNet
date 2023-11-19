@@ -1,7 +1,21 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
 
 namespace LearningDotNet.Application.Features.Students;
+
+public static class CreateStudentApiEndpoint
+{
+    public static void ConfigureStudentCreateApiEndpoint(this WebApplication webApplication)
+    {
+        webApplication.MapPost(
+                $"{ApiEndpoints.ApiPrefix}/{ApiEndpoints.ApiVersion}/{ApiEndpoints.StudentsApiName}/{ApiActions.Create}",
+                async (CreateStudentRequest request, IMediator mediator)
+                => await mediator.Send(request))
+            .WithName("CreateStudent")
+          .WithOpenApi();
+    }
+}
 
 public class CreateStudentRequest : IRequest<CreateStudentResponse>
 {
@@ -9,6 +23,7 @@ public class CreateStudentRequest : IRequest<CreateStudentResponse>
 
     public string Surname { get; set; } = null!;
 }
+
 public class CreateStudentResponse
 {
     public bool Success { get; set; }
