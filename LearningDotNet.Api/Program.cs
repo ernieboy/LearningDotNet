@@ -20,9 +20,10 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
-        builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateStudentRequestHandler>());
+        builder.Services.AddValidatorsFromAssembly(typeof(CreateStudentRequestValidator).Assembly);
+        builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        
 
         builder.Services.RegisterServices(builder);
         var app = builder.Build();
