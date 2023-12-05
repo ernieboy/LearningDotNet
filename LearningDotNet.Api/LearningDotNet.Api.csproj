@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <UserSecretsId>be874e22-9c41-4f4f-b93f-9d4b2f9e460d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,4 +18,5 @@
     <ProjectReference Include="..\LearningDotNet.Common\LearningDotNet.Common.csproj" />
     <ProjectReference Include="..\LearningDotNet.Infrastructure\LearningDotNet.Infrastructure.csproj" />
   </ItemGroup>
+
 </Project>

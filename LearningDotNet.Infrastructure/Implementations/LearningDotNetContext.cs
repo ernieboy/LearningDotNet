@@ -1,9 +1,13 @@
-﻿using LearningDotNet.Application.Abstractions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace LearningDotNet.Infrastructure.Implementations
+namespace LearningDotNet.Infrastructure.Implementations;
+
+public class LearningDotNetContext : DbContext
 {
-    public class LearningDotNetContext : DbContext, ILearningDotNetContext
+    public LearningDotNetContext(DbContextOptions<LearningDotNetContext> options)
+        :base(options)
     {
+        
     }
 }
+
