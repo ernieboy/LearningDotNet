@@ -8,7 +8,12 @@ internal class StudentConfiguration : IEntityTypeConfiguration<Student>
 {
     public void Configure(EntityTypeBuilder<Student> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(t => t.Id);
+        builder.Property(p => p.Firstname).IsRequired().HasMaxLength(50);
+        builder.Property(p => p.Lastname).IsRequired().HasMaxLength(50);
+        builder.Property(p => p.DateOfBirth).IsRequired();
+        builder.Property(p => p.RowVersion)
+            .IsConcurrencyToken();
+        builder.ToTable("Students");
     }
 }
-

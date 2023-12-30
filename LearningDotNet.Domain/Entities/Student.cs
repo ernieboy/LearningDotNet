@@ -2,9 +2,20 @@
 
 public class Student : BaseEntity
 {
-    public string Firstname { get; private set; } = string.Empty;
+    public Student()
+    {
+        
+    }
+    public Student(string firstName, string lastName, DateOnly dateOfBirth)
+    {
+        Firstname = firstName;
+        Lastname = lastName;
+        DateOfBirth = dateOfBirth;
+    }
 
-    public string Lastname { get; private set; } = string.Empty;
+    public string Firstname { get; set; }
 
-    public DateOnly DateOfBirth { get; private set; }
+    public string Lastname { get; set; }
+
+    public DateOnly DateOfBirth { get; set; }
 }

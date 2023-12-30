@@ -24,11 +24,11 @@ internal sealed class EntityAuditInterceptor : SaveChangesInterceptor
             switch (entry.State)
             {
                 case EntityState.Added:
-                    entity.SetDateCreatedUtc(now);
-                    entity.SetDateLastUpdatedUtc(now);
+                    entity.AddEntityCreationAuditData(now);
+                    entity.AddEntityUpdateAuditData(now);
                     break;
                 case EntityState.Modified:
-                    entity.SetDateLastUpdatedUtc(now);
+                    entity.AddEntityUpdateAuditData(now);
                     break;
                 case EntityState.Detached:
                     break;

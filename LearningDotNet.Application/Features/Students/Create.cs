@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using LearningDotNet.Domain.Entities;
+using LearningDotNet.Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 
@@ -19,9 +21,11 @@ public static class CreateStudentApiEndpoint
 
 public class CreateStudentRequest : IRequest<CreateStudentResponse>
 {
-    public string Firstname { get; set; } = null!;
+    public string Firstname { get; set; } = string.Empty;
 
-    public string Surname { get; set; } = null!;
+    public string Lastname { get; set; } = string.Empty;
+
+    public string DateOfBirth { get; set; } = string.Empty;
 }
 
 public class CreateStudentResponse
@@ -29,11 +33,16 @@ public class CreateStudentResponse
     public bool Success { get; set; }
 }
 
-public class CreateStudentRequestHandler : IRequestHandler<CreateStudentRequest, CreateStudentResponse>
+public class CreateStudentRequestHandler(IUnitOfWork unitOfWork,
+        IStudentRepository studentRepository)
+    : IRequestHandler<CreateStudentRequest, CreateStudentResponse>
 {
-    public Task<CreateStudentResponse> Handle(CreateStudentRequest request, CancellationToken cancellationToken)
+    public async Task<CreateStudentResponse> Handle(CreateStudentRequest request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var student = new Student(request.Firstname, request.Lastname, DateOnly.Parse(request.DateOfBirth));
+        studentRepository.Add(student);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+        return new CreateStudentResponse {Success = true};
     }
 }
 
@@ -42,6 +51,13 @@ public class CreateStudentRequestValidator : AbstractValidator<CreateStudentRequ
     public CreateStudentRequestValidator()
     {
         RuleFor(p => p.Firstname).NotEmpty().MaximumLength(50);
-        RuleFor(p => p.Surname).NotEmpty().MaximumLength(50);
+        RuleFor(p => p.Lastname).NotEmpty().MaximumLength(50);
+        RuleFor(p => p.DateOfBirth).Must(BeAValidDate).WithMessage("Date of birth must be in the format dd/mm/yyyy.");
+    }
+
+    private bool BeAValidDate(string value)
+    {
+        DateOnly date;
+        return DateOnly.TryParse(value, out date);
     }
 }
