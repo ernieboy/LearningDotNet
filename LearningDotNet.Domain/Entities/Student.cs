@@ -1,6 +1,4 @@
-﻿using LearningDotNet.Common;
-
-namespace LearningDotNet.Application.Features.Students;
+﻿namespace LearningDotNet.Domain.Entities;
 
 public class Student : BaseEntity
 {

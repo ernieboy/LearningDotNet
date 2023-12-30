@@ -1,4 +1,4 @@
-﻿namespace LearningDotNet.Common;
+﻿namespace LearningDotNet.Domain.Entities;
 
 public class BaseEntity
 {
