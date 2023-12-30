@@ -1,4 +1,4 @@
-﻿using LearningDotNet.Infrastructure.Implementations;
+﻿using LearningDotNet.Infrastructure.EntityFramework;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;

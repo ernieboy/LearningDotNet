@@ -1,5 +1,5 @@
 ﻿using LearningDotNet.Application;
-using LearningDotNet.Infrastructure.Implementations;
+using LearningDotNet.Infrastructure.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
