@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningDotNet.Common", "Le
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningDotNet.Domain", "LearningDotNet.Domain\LearningDotNet.Domain.csproj", "{4C721A9E-35E3-427C-B32D-A2C73420088C}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LearningDotNet.Infrastructure.Database", "LearningDotNet.Infrastructure.Database\LearningDotNet.Infrastructure.Database.sqlproj", "{CE346BC7-9E6C-4025-80A6-E01216DEE744}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,12 @@ Global
 		{4C721A9E-35E3-427C-B32D-A2C73420088C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C721A9E-35E3-427C-B32D-A2C73420088C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C721A9E-35E3-427C-B32D-A2C73420088C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE346BC7-9E6C-4025-80A6-E01216DEE744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE346BC7-9E6C-4025-80A6-E01216DEE744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE346BC7-9E6C-4025-80A6-E01216DEE744}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CE346BC7-9E6C-4025-80A6-E01216DEE744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE346BC7-9E6C-4025-80A6-E01216DEE744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE346BC7-9E6C-4025-80A6-E01216DEE744}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +75,7 @@ Global
 		{EED28EBD-B031-4EB6-B4E5-985F2B2EF7EF} = {D986397E-06D4-4920-A8DF-A180135C2E55}
 		{C520269E-19A4-4A71-B807-1F6774C0D199} = {8F91E8BA-4747-4AE0-A691-06623F2D7483}
 		{4C721A9E-35E3-427C-B32D-A2C73420088C} = {8F91E8BA-4747-4AE0-A691-06623F2D7483}
+		{CE346BC7-9E6C-4025-80A6-E01216DEE744} = {8F91E8BA-4747-4AE0-A691-06623F2D7483}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CBCD77D-B510-4DE4-B7D8-AB6F2AA082E3}
