@@ -17,12 +17,8 @@ public class StudentEndpoints : ICarterModule
             .WithOpenApi();
 
         group.MapPut(ApiActions.Edit,
-                async (EditStudentRequest request, Guid id, IMediator mediator)
-                    =>
-                {
-                    request.Id = id;
-                    return await mediator.Send(request);
-                })
+                async (EditStudentRequest request, IMediator mediator)
+                    => await mediator.Send(request))
             .WithName("EditStudent")
             .WithOpenApi();
     }

@@ -7,7 +7,7 @@ namespace LearningDotNet.Application.Features.Students;
 
 public class EditStudentRequest : IRequest<EditStudentResponse>
 {
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
 
     public string Firstname { get; set; } = string.Empty;
 
@@ -27,7 +27,7 @@ public class EditStudentRequestHandler(IUnitOfWork unitOfWork,
 {
     public async Task<EditStudentResponse> Handle(EditStudentRequest request, CancellationToken cancellationToken)
     {
-        var student = await studentRepository.FindById(request.Id, cancellationToken);
+        var student = await studentRepository.FindById(request.Id!.Value, cancellationToken);
         ArgumentNullException.ThrowIfNull(student);
         student.Update(request.Firstname, request.Lastname,
             DateOnly.Parse(request.DateOfBirth, Constants.UkCultureInfo));

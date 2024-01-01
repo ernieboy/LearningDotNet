@@ -26,7 +26,7 @@ public class Program
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateStudentRequestHandler>());
         builder.Services.AddValidatorsFromAssembly(typeof(CreateStudentRequestValidator).Assembly);
         builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-        
+
         builder.Services.RegisterServices(builder);
         var app = builder.Build();
 
@@ -41,8 +41,6 @@ public class Program
         app.UseHttpsRedirection();
         app.RegisterWeatherApi();
         app.MapCarter();
-       // app.ConfigureStudentCreateApiEndpoint();
-       // app.ConfigureStudentEditApiEndpoint();
 
         app.Run();
     }
