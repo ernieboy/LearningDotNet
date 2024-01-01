@@ -1,3 +1,4 @@
+using Carter;
 using FluentValidation;
 using LearningDotNet.Api.Behaviours;
 using LearningDotNet.Api.Extensions;
@@ -20,6 +21,7 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddCarter();
 
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateStudentRequestHandler>());
         builder.Services.AddValidatorsFromAssembly(typeof(CreateStudentRequestValidator).Assembly);
@@ -38,8 +40,9 @@ public class Program
 
         app.UseHttpsRedirection();
         app.RegisterWeatherApi();
-        app.ConfigureStudentCreateApiEndpoint();
-        app.ConfigureStudentEditApiEndpoint();
+        app.MapCarter();
+       // app.ConfigureStudentCreateApiEndpoint();
+       // app.ConfigureStudentEditApiEndpoint();
 
         app.Run();
     }

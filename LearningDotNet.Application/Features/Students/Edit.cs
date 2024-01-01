@@ -2,26 +2,8 @@
 using LearningDotNet.Common;
 using LearningDotNet.Domain.Interfaces;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
 
 namespace LearningDotNet.Application.Features.Students;
-
-public static class EditStudentApiEndpoint
-{
-    public static void ConfigureStudentEditApiEndpoint(this WebApplication webApplication)
-    {
-        webApplication.MapPut(
-                $"{ApiEndpoints.ApiPrefix}/{ApiEndpoints.ApiVersion}/{ApiEndpoints.StudentsApiName}/{ApiActions.Edit}",
-                async (EditStudentRequest request, Guid id, IMediator mediator)
-                    =>
-                {
-                    request.Id = id;
-                    return await mediator.Send(request);
-                })
-            .WithName("EditStudent")
-            .WithOpenApi();
-    }
-}
 
 public class EditStudentRequest : IRequest<EditStudentResponse>
 {

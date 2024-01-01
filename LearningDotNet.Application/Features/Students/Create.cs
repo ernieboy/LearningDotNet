@@ -3,22 +3,8 @@ using LearningDotNet.Common;
 using LearningDotNet.Domain.Entities;
 using LearningDotNet.Domain.Interfaces;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
 
 namespace LearningDotNet.Application.Features.Students;
-
-public static class CreateStudentApiEndpoint
-{
-    public static void ConfigureStudentCreateApiEndpoint(this WebApplication webApplication)
-    {
-        webApplication.MapPost(
-                $"{ApiEndpoints.ApiPrefix}/{ApiEndpoints.ApiVersion}/{ApiEndpoints.StudentsApiName}/{ApiActions.Create}",
-                async (CreateStudentRequest request, IMediator mediator)
-                => await mediator.Send(request))
-            .WithName("CreateStudent")
-          .WithOpenApi();
-    }
-}
 
 public class CreateStudentRequest : IRequest<CreateStudentResponse>
 {
@@ -53,7 +39,7 @@ public class CreateStudentRequestValidator : AbstractValidator<CreateStudentRequ
     {
         RuleFor(p => p.Firstname).NotEmpty().MaximumLength(StudentValidation.FirstNameMaxLength);
         RuleFor(p => p.Lastname).NotEmpty().MaximumLength(StudentValidation.LastNameMaxLength);
-        RuleFor(p => p.DateOfBirth).Must(p => FluentValidationsHelper.BeAValidDate(p,Constants.UkCultureInfo))
+        RuleFor(p => p.DateOfBirth).Must(p => FluentValidationsHelper.BeAValidDate(p, Constants.UkCultureInfo))
             .WithMessage(ValidationMessages.UkDateFormatValidationHint);
     }
 }
