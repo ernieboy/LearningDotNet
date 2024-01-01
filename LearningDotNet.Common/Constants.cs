@@ -4,6 +4,5 @@ namespace LearningDotNet.Common;
 
 public static class Constants
 {
-    public static CultureInfo UkCultureInfo => new CultureInfo("en-GB");
+    public static CultureInfo UkCultureInfo => new("en-GB");
 }
-

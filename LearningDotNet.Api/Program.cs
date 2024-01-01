@@ -39,6 +39,7 @@ public class Program
         app.UseHttpsRedirection();
         app.RegisterWeatherApi();
         app.ConfigureStudentCreateApiEndpoint();
+        app.ConfigureStudentEditApiEndpoint();
 
         app.Run();
     }

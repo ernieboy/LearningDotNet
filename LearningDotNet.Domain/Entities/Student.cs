@@ -18,4 +18,14 @@ public class Student : BaseEntity
     public string Lastname { get; set; }
 
     public DateOnly DateOfBirth { get; set; }
+
+    public void Update(string firstName, string lastName, DateOnly dateOfBirth)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(firstName);
+        ArgumentException.ThrowIfNullOrEmpty(lastName);
+
+        Firstname = firstName; 
+        Lastname = lastName; 
+        DateOfBirth = dateOfBirth;
+    }
 }

@@ -51,9 +51,9 @@ public class CreateStudentRequestValidator : AbstractValidator<CreateStudentRequ
 {
     public CreateStudentRequestValidator()
     {
-        RuleFor(p => p.Firstname).NotEmpty().MaximumLength(50);
-        RuleFor(p => p.Lastname).NotEmpty().MaximumLength(50);
+        RuleFor(p => p.Firstname).NotEmpty().MaximumLength(StudentValidation.FirstNameMaxLength);
+        RuleFor(p => p.Lastname).NotEmpty().MaximumLength(StudentValidation.LastNameMaxLength);
         RuleFor(p => p.DateOfBirth).Must(p => FluentValidationsHelper.BeAValidDate(p,Constants.UkCultureInfo))
-            .WithMessage("Date of birth must be in the format dd/mm/yyyy.");
+            .WithMessage(ValidationMessages.UkDateFormatValidationHint);
     }
 }
