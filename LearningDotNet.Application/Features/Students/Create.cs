@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using LearningDotNet.Common;
 using LearningDotNet.Domain.Entities;
 using LearningDotNet.Domain.Interfaces;
 using MediatR;
@@ -39,10 +40,10 @@ public class CreateStudentRequestHandler(IUnitOfWork unitOfWork,
 {
     public async Task<CreateStudentResponse> Handle(CreateStudentRequest request, CancellationToken cancellationToken)
     {
-        var student = new Student(request.Firstname, request.Lastname, DateOnly.Parse(request.DateOfBirth));
+        var student = new Student(request.Firstname, request.Lastname, DateOnly.Parse(request.DateOfBirth, Constants.UkCultureInfo));
         studentRepository.Add(student);
         await unitOfWork.SaveChangesAsync(cancellationToken);
-        return new CreateStudentResponse {Success = true};
+        return new CreateStudentResponse { Success = true };
     }
 }
 
@@ -52,12 +53,7 @@ public class CreateStudentRequestValidator : AbstractValidator<CreateStudentRequ
     {
         RuleFor(p => p.Firstname).NotEmpty().MaximumLength(50);
         RuleFor(p => p.Lastname).NotEmpty().MaximumLength(50);
-        RuleFor(p => p.DateOfBirth).Must(BeAValidDate).WithMessage("Date of birth must be in the format dd/mm/yyyy.");
-    }
-
-    private bool BeAValidDate(string value)
-    {
-        DateOnly date;
-        return DateOnly.TryParse(value, out date);
+        RuleFor(p => p.DateOfBirth).Must(p => FluentValidationsHelper.BeAValidDate(p,Constants.UkCultureInfo))
+            .WithMessage("Date of birth must be in the format dd/mm/yyyy.");
     }
 }
