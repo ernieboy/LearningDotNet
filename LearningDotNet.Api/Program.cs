@@ -1,7 +1,6 @@
 using Carter;
 using FluentValidation;
 using LearningDotNet.Api.Behaviours;
-using LearningDotNet.Api.Extensions;
 using LearningDotNet.Application.Features.Students;
 using LearningDotNet.Common.Middleware;
 using LearningDotNet.Infrastructure.DependencyInjection;
@@ -39,7 +38,6 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-        app.RegisterWeatherApi();
         app.MapCarter();
 
         app.Run();
