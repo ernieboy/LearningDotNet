@@ -18,9 +18,14 @@ public class StudentRepository(LearningDotNetContext learningDotNetContext) : IS
         learningDotNetContext.Entry(student).State = EntityState.Modified;
     }
 
+    public void Delete(Student student)
+    {
+        learningDotNetContext.Attach(student);
+        learningDotNetContext.Entry(student).State = EntityState.Deleted;
+    }
+
     public async Task<Student?> FindById(Guid id, CancellationToken cancellationToken = default)
     {
-        var student = await learningDotNetContext.Students.FindAsync(id, cancellationToken);
-        return student;
+        return await learningDotNetContext.Students.FindAsync(id, cancellationToken);
     }
 }

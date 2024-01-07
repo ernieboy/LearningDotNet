@@ -9,4 +9,6 @@ public interface IStudentRepository
     Task<Student?> FindById(Guid id, CancellationToken cancellationToken);
 
     void Update(Student student);
+
+    void Delete(Student student);
 }

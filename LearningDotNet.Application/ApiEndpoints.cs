@@ -9,7 +9,6 @@ internal static class ApiEndpoints
     public const string StudentsApiName = "students";
 }
 
-
 internal static class ApiActions
 {
     public const string Create = "create";
@@ -18,4 +17,5 @@ internal static class ApiActions
 
     public const string Delete = "delete";
 
+    public const string List = "list";
 }
