@@ -2,9 +2,8 @@
 
 public class Student : BaseEntity
 {
-    public Student()
+    internal Student()
     {
-        
     }
     public Student(string firstName, string lastName, DateOnly dateOfBirth)
     {
@@ -13,11 +12,11 @@ public class Student : BaseEntity
         DateOfBirth = dateOfBirth;
     }
 
-    public string Firstname { get; set; }
+    public string Firstname { get; private set; } = string.Empty;
 
-    public string Lastname { get; set; }
+    public string Lastname { get; private set; } = string.Empty;
 
-    public DateOnly DateOfBirth { get; set; }
+    public DateOnly DateOfBirth { get; private set; }
 
     public void Update(string firstName, string lastName, DateOnly dateOfBirth)
     {
