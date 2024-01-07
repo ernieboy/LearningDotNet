@@ -33,5 +33,11 @@ public class StudentEndpoints : ICarterModule
                     => await mediator.Send(new ListStudentsRequest()))
             .WithName("ListStudents")
             .WithOpenApi();
+
+        group.MapGet($"{ApiActions.List}/{{id}}",
+                async (Guid id, IMediator mediator)
+                    => await mediator.Send(new ListStudentByIdRequest { Id = id }))
+            .WithName("ListStudentById")
+            .WithOpenApi();
     }
 }
