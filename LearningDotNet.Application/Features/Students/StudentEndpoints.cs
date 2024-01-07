@@ -28,13 +28,13 @@ public class StudentEndpoints : ICarterModule
             .WithName("DeleteStudent")
             .WithOpenApi();
 
-        group.MapGet(ApiActions.List,
+        group.MapGet(string.Empty,
                 async (IMediator mediator)
                     => await mediator.Send(new ListStudentsRequest()))
             .WithName("ListStudents")
             .WithOpenApi();
 
-        group.MapGet($"{ApiActions.List}/{{id}}",
+        group.MapGet("{id}",
                 async (Guid id, IMediator mediator)
                     => await mediator.Send(new ListStudentByIdRequest { Id = id }))
             .WithName("ListStudentById")
