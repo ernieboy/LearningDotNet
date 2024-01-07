@@ -8,6 +8,8 @@ public interface IStudentRepository
 
     Task<Student?> FindById(Guid id, CancellationToken cancellationToken);
 
+    Task<IEnumerable<Student?>> FindAll(CancellationToken cancellationToken);
+
     void Update(Student student);
 
     void Delete(Student student);

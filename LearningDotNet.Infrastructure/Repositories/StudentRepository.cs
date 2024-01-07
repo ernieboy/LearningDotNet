@@ -12,6 +12,11 @@ public class StudentRepository(LearningDotNetContext learningDotNetContext) : IS
         learningDotNetContext.Set<Student>().Add(student);
     }
 
+    public async Task<IEnumerable<Student?>> FindAll(CancellationToken cancellationToken)
+    {
+        return await learningDotNetContext.Students.ToListAsync(cancellationToken);
+    }
+
     public void Update(Student student)
     {
         learningDotNetContext.Attach(student);
@@ -24,7 +29,7 @@ public class StudentRepository(LearningDotNetContext learningDotNetContext) : IS
         learningDotNetContext.Entry(student).State = EntityState.Deleted;
     }
 
-    public async Task<Student?> FindById(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Student?> FindById(Guid id, CancellationToken cancellationToken)
     {
         return await learningDotNetContext.Students.FindAsync(id, cancellationToken);
     }
